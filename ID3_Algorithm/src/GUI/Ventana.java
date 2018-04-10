@@ -89,7 +89,7 @@ public class Ventana extends JFrame {
 				try {
 					  String userPath = System.getProperty("user.dir");
 					  String separator = File.separator;
-					  String folderPath = userPath + separator + "src" + separator + "Ficheros" + separator + "Juego.txt";
+					  String folderPath = userPath + separator + "Files" + separator + "Juego.txt";
 					  System.out.println(folderPath);
 					arbol = algo.algoritmo(folderPath, ",");
 				} catch (IOException e1) {

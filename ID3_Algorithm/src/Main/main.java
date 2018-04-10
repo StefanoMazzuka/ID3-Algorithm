@@ -1,16 +1,11 @@
 package Main;
 
+import GUI.Menu;
 import GUI.Ventana;
-import GestionarFicheros.LeerFichero;
 
 public class main {
-
 	public static void main(String[] args) {
-		
-		Ventana v= new Ventana("Práctica 2: ID3");
+		Ventana v = new Ventana("Hola");
 		v.setVisible(true);
-		//LeerFichero lf = new LeerFichero("Juego");
 	}
-
 }
-//TiempoExterior, Temperatura, Humedad, Viento
