@@ -14,7 +14,7 @@ import java.util.Set;
 public class Id3{
 
 	private String[] atributos;
-	private int indiceAtributo=-1;
+	private int indiceAtributo = -1;
 	private Set<String> valoresAtributo = new HashSet<String>();
 
 	public Arbol algoritmo(String entrada, String separador) throws IOException{
@@ -27,9 +27,9 @@ public class Id3{
 		String linea=br.readLine();
 		atributos = linea.split(separador);
 		int[] atributosRestantes = new int[atributos.length-1]; //este array contiene todos los atributos excepto el atributo objetivo
-		int j=0; //segundo contador para las posiciones
+		int j = 0; //segundo contador para las posiciones
 
-		for(int i=0;i<atributos.length;i++){
+		for(int i = 0; i < atributos.length; i++){
 			if(atributos[i].equalsIgnoreCase("si") || atributos[i].equalsIgnoreCase("no") ){
 				indiceAtributo=i; //guardamos posicion del atributoObjetivo
 			}else{

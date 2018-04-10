@@ -19,100 +19,100 @@ public class Ventana extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JComboBox<String> comboEx,comboTmp,comboHum,comboVnt;
+	private JComboBox<String> tiempo, temperatura, humedad, viento;
 	private JPanel contenedor, pDatos, boton;
-	private JLabel ext,tmp,hum,vnt;
-	
+	private JLabel ext, tmp, hum, vnt;
+
 	public Ventana(String titulo) {
-		
+
 		//metodos de la ventana
 		setTitle(titulo);
 		setSize(new Dimension(400, 200));
 		setLocationRelativeTo(null);
 		setResizable(false); 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
+
 		contenedor= new JPanel();
 		contenedor.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 40));
 		contenedor.setLayout(new BorderLayout());
-		
+
 		//paneles
 		pDatos=new JPanel();
 		pDatos.setLayout(new GridLayout(4, 2));
-		
+
 		ext=new JLabel("Tiempo exterior:");
-		comboEx = new JComboBox<String>();
-		comboEx.addItem("Soleado");
-		comboEx.addItem("Lluvioso");
-		comboEx.addItem("Nublado");
+		tiempo = new JComboBox<String>();
+		tiempo.addItem("Soleado");
+		tiempo.addItem("Lluvioso");
+		tiempo.addItem("Nublado");
 		pDatos.add(ext);
-		pDatos.add(comboEx);
-		
+		pDatos.add(tiempo);
+
 		tmp=new JLabel("Temperatura:");
-		comboTmp= new JComboBox<String>();
-		comboTmp.addItem("Caluroso");
-		comboTmp.addItem("Templado");
-		comboTmp.addItem("Frio");
+		temperatura= new JComboBox<String>();
+		temperatura.addItem("Caluroso");
+		temperatura.addItem("Templado");
+		temperatura.addItem("Frio");
 		pDatos.add(tmp);
-		pDatos.add(comboTmp);
-		
+		pDatos.add(temperatura);
+
 		hum=new JLabel("Humedad:");
-		comboHum= new JComboBox<String>();
-		comboHum.addItem("Alta");
-		comboHum.addItem("Normal");
+		humedad= new JComboBox<String>();
+		humedad.addItem("Alta");
+		humedad.addItem("Normal");
 		pDatos.add(hum);
-		pDatos.add(comboHum);
-		
+		pDatos.add(humedad);
+
 		vnt=new JLabel("Viento:");
-		comboVnt= new JComboBox<String>();
-		comboVnt.addItem("Falso");
-		comboVnt.addItem("Verdad");
+		viento= new JComboBox<String>();
+		viento.addItem("Falso");
+		viento.addItem("Verdad");
 		pDatos.add(vnt);
-		pDatos.add(comboVnt);
-		
-		
+		pDatos.add(viento);
+
 		boton=new JPanel();
 		JButton btnOk=new JButton("¿Jugamos?");
 		btnOk.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				//creamos el array con los datos recogidos
-				String[] atributos = { ((String) comboEx.getSelectedItem()).toLowerCase(),
-										((String) comboTmp.getSelectedItem()).toLowerCase(),		
-										((String) comboHum.getSelectedItem()).toLowerCase(),
-										((String) comboVnt.getSelectedItem()).toLowerCase()};
-				Id3 algo=new Id3();
-				Arbol arbol = null;
+				String[] atributos = { 
+						((String) tiempo.getSelectedItem()).toLowerCase(),
+						((String) temperatura.getSelectedItem()).toLowerCase(),		
+						((String) humedad.getSelectedItem()).toLowerCase(),
+						((String) viento.getSelectedItem()).toLowerCase()
+				};
 				
+				Id3 algo = new Id3();
+				Arbol arbol = null;
+
 				try {
-					  String userPath = System.getProperty("user.dir");
-					  String separator = File.separator;
-					  String folderPath = userPath + separator + "src" + separator + "Ficheros" + separator + "Juego.txt";
-					  System.out.println(folderPath);
+					String userPath = System.getProperty("user.dir");
+					String separator = File.separator;
+					String folderPath = userPath + separator + "src" + separator + "Ficheros" + separator + "Juego.txt";
+					System.out.println(folderPath);
 					arbol = algo.algoritmo(folderPath, ",");
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				} 
-				
+
 				String prediccion=arbol.predecirValor(atributos);
-				
-				if(prediccion.equalsIgnoreCase("si")){
-					Icon icono = new ImageIcon(getClass().getResource("/img/posible.png"));
-					JOptionPane.showMessageDialog(null, "¡PODEMOS JUGAR!", "¿Jugamos?", JOptionPane.PLAIN_MESSAGE, icono);
-				}else {
-					Icon icono = new ImageIcon(getClass().getResource("/img/noPosible.png"));
-					JOptionPane.showMessageDialog(null, "¡NO PODEMOS JUGAR!", "¿Jugamos?", JOptionPane.PLAIN_MESSAGE, icono);
-				}		
+
+				if(prediccion.equalsIgnoreCase("si"))
+					JOptionPane.showMessageDialog(null, "Si puedes jugar.");
+				else
+					JOptionPane.showMessageDialog(null, "No puedes jugar.");		
 			}
 		});
+
 		boton.add(btnOk);
-		
+
 		contenedor.add(pDatos,BorderLayout.CENTER);
 		contenedor.add(btnOk,BorderLayout.SOUTH);
-		
+
 		add(contenedor);
-		
+
 	}
 }

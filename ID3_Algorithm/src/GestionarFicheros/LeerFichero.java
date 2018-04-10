@@ -29,8 +29,8 @@ public class LeerFichero {
 
 			// Lectura del fichero
 			String linea;
-			while((linea=br.readLine())!=null)
-				System.out.println(linea);    
+			while((linea = br.readLine())!= null)
+				System.out.println(linea); 
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -45,16 +45,4 @@ public class LeerFichero {
 		}//finally
 
 	}//Leer
-
-//		  String userPath = System.getProperty("user.dir");
-//		  String separator = File.separator;
-//		  String folderPath = userPath + separator + "Files";
-//
-//		  File folder = new File(folderPath);
-//		  if (!folder.exists()) folder.mkdir();
-//		  
-//		  String[] files = folder.list();
-//		  for (int i = 0; i< files.length; i++) {
-//		  System.out.println((i + 1) + " - " + carpeta + separador + ficheros[i]);
-//		   }
 }
