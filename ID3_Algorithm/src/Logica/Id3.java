@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -17,12 +18,13 @@ public class Id3{
 	private int indiceAtributo = -1;
 	private Set<String> valoresAtributo = new HashSet<String>();
 
-	public Arbol algoritmo(String entrada, String separador) throws IOException{
+	public Arbol algoritmo(String separador) throws IOException{
 
 		Arbol arbol = new Arbol();
-		File archivo = new File (entrada); //Archivo
-        FileReader fr = new FileReader (archivo); //fichero creado con el archivo
-        BufferedReader br = new BufferedReader(fr); 
+		BufferedReader br = new BufferedReader(
+			    new InputStreamReader(
+			        getClass().getClassLoader().getResourceAsStream(
+			            "Ficheros/Juego.txt")));
 		
 		String linea=br.readLine();
 		atributos = linea.split(separador);

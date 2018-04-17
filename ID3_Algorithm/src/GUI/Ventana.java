@@ -1,12 +1,17 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Scanner;
 
 import javax.swing.*;
 
@@ -23,18 +28,19 @@ public class Ventana extends JFrame {
 	private JPanel contenedor, pDatos, boton;
 	private JLabel ext, tmp, hum, vnt;
 
-	public Ventana(String titulo) {
+	public Ventana() {
 
 		//metodos de la ventana
-		setTitle(titulo);
-		setSize(new Dimension(400, 200));
+		setTitle("ID3 Algortihm");
+		setSize(new Dimension(400, 250));
 		setLocationRelativeTo(null);
 		setResizable(false); 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-
+		
 		contenedor= new JPanel();
-		contenedor.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 40));
+		contenedor.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		contenedor.setLayout(new BorderLayout());
+		contenedor.setBackground(Color.decode("#81F7F3"));
 
 		//paneles
 		pDatos=new JPanel();
@@ -62,6 +68,7 @@ public class Ventana extends JFrame {
 		humedad.addItem("Normal");
 		pDatos.add(hum);
 		pDatos.add(humedad);
+		pDatos.setBackground(Color.decode("#81F7F3"));
 
 		vnt=new JLabel("Viento:");
 		viento= new JComboBox<String>();
@@ -71,14 +78,14 @@ public class Ventana extends JFrame {
 		pDatos.add(viento);
 
 		boton=new JPanel();
-		JButton btnOk=new JButton("¿Jugamos?");
+		JButton btnOk=new JButton("¿Puedo jugar?");
 		btnOk.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
 				//creamos el array con los datos recogidos
-				String[] atributos = { 
+				String[] atributos = {
 						((String) tiempo.getSelectedItem()).toLowerCase(),
 						((String) temperatura.getSelectedItem()).toLowerCase(),		
 						((String) humedad.getSelectedItem()).toLowerCase(),
@@ -89,11 +96,7 @@ public class Ventana extends JFrame {
 				Arbol arbol = null;
 
 				try {
-					String userPath = System.getProperty("user.dir");
-					String separator = File.separator;
-					String folderPath = userPath + separator + "src" + separator + "Ficheros" + separator + "Juego.txt";
-					System.out.println(folderPath);
-					arbol = algo.algoritmo(folderPath, ",");
+					arbol = algo.algoritmo(",");
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				} 
@@ -101,9 +104,9 @@ public class Ventana extends JFrame {
 				String prediccion=arbol.predecirValor(atributos);
 
 				if(prediccion.equalsIgnoreCase("si"))
-					JOptionPane.showMessageDialog(null, "Si puedes jugar.");
+					JOptionPane.showMessageDialog(null, "Si puedes jugar :)");
 				else
-					JOptionPane.showMessageDialog(null, "No puedes jugar.");		
+					JOptionPane.showMessageDialog(null, "No puedes jugar :(");		
 			}
 		});
 
@@ -113,6 +116,5 @@ public class Ventana extends JFrame {
 		contenedor.add(btnOk,BorderLayout.SOUTH);
 
 		add(contenedor);
-
 	}
 }
